@@ -10,6 +10,8 @@ namespace Com.Femeuc.GolfOnline
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
+        bool isConnecting;
+
         void Awake()
         {
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
@@ -30,21 +32,25 @@ namespace Com.Femeuc.GolfOnline
             else
             {
                 // #Critical, we must first and foremost connect to Photon Online Server.
-                PhotonNetwork.ConnectUsingSettings();
+                isConnecting = PhotonNetwork.ConnectUsingSettings();
                 PhotonNetwork.GameVersion = gameVersion;
             }
         }
 
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.JoinRandomRoom();
-            printPlayersInRoomEveryFourSeconds();
+            if (isConnecting)
+            {
+                // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
+                PhotonNetwork.JoinRandomRoom();
+                isConnecting = false;
+            }
         }
 
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+            isConnecting = false;
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -55,13 +61,15 @@ namespace Com.Femeuc.GolfOnline
 
         public override void OnJoinedRoom()
         {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+            // #Critical
+            // Load the Room Level.
+            PhotonNetwork.LoadLevel("Room-1");
         }
 
         public void printPlayersInRoomEveryFourSeconds()
         {
             int index = 1;
-            foreach(Player player in PhotonNetwork.PlayerList)
+            foreach (Player player in PhotonNetwork.PlayerList)
             {
                 Debug.Log("Player " + index + ": " + player.NickName);
                 index++;
