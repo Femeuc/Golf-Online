@@ -177,3 +177,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3c98253ea436642a112a64edfa1f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraHeightRelativeToTheTarget: 1.5
+  cameraDistanceOfTheTarget: -4
