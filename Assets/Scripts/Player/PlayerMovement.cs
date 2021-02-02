@@ -10,6 +10,11 @@ public class PlayerMovement : MonoBehaviourPun
     
     void Start()
     {
+        if (!photonView.IsMine)
+        {
+            this.enabled = false;
+            return;
+        }
         playerRb = GetComponent<Rigidbody>();
         cam = Camera.main;
 
@@ -24,8 +29,6 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void ThrowBall()
     {
-        if (!photonView.IsMine) return; 
-
         playerRb.AddForce(cam.transform.forward * 100, ForceMode.Force);
     }
 }
