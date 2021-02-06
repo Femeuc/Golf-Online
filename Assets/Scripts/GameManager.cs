@@ -3,6 +3,7 @@ using Photon.Pun;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using Photon.Realtime;
 
 namespace Com.Femeuc.GolfOnline
 {
@@ -21,8 +22,6 @@ namespace Com.Femeuc.GolfOnline
             {
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-
-                addaptGUI();
             }
         }
 
@@ -34,26 +33,6 @@ namespace Com.Femeuc.GolfOnline
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
-        }
-
-        private void addaptGUI()
-        {
-            if (PhotonNetwork.IsMasterClient)
-                useMasterClientUI();
-            else
-                useClientUI();
-        }
-
-        private void useMasterClientUI()
-        {
-            GameObject.Find("WaitingForHost").SetActive(false);
-        }
-
-        private void useClientUI()
-        {
-            Button btn = GameObject.Find("StartButton").GetComponent<Button>();
-            Text text = btn.GetComponentInChildren<Text>();
-            text.text = "Jogadores na sala";
         }
     }
 }
