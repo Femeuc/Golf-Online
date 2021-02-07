@@ -63,18 +63,7 @@ namespace Com.Femeuc.GolfOnline
         {
             // #Critical
             // Load the Room Level.
-            PhotonNetwork.LoadLevel("Room-1");
-        }
-
-        public void printPlayersInRoomEveryFourSeconds()
-        {
-            int index = 1;
-            foreach (Player player in PhotonNetwork.PlayerList)
-            {
-                Debug.Log("Player " + index + ": " + player.NickName);
-                index++;
-            }
-            Invoke("printPlayersInRoomEveryFourSeconds", 4);
+            PhotonNetwork.LoadLevel("Waiting-room-1");
         }
     }
 }
