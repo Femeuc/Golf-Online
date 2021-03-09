@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -2822536981510667064}
   - component: {fileID: -7613732075796549428}
   - component: {fileID: -6866262022273290406}
+  - component: {fileID: -3040676163797557151}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,6 +119,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 487650161892335912}
+  - {fileID: -3040676163797557151}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -179,3 +181,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHeightRelativeToTheTarget: 1.5
   cameraDistanceOfTheTarget: -4
+--- !u!114 &-3040676163797557151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655885621071455557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627563c6d0c504d40bfbda0db0a1fc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
